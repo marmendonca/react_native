@@ -7,7 +7,6 @@ import {
 
 export function Button({onPress}){
     return(
-
         <TouchableOpacity 
         style={styles.button} 
         activeOpacity={.7}
