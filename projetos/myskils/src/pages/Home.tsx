@@ -10,13 +10,22 @@ import {
 import { Button } from '../components/Button';
 import { SkillCard } from '../components/SkillCard';
 
+interface SkillData {
+  id: string;
+  name: string;
+}
+
 export function Home(){
   const [newSkill, setNewSkill] = useState('');
-  const [mySkills, setMyNewSkills] = useState([]);
+  const [mySkills, setMyNewSkills] = useState<SkillData[]>([]);
   const [gretting, setGretting] = useState('');
 
   function handleAddNewSkill() {
-    setMyNewSkills(oldState => [...oldState, newSkill])
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill
+    }
+    setMyNewSkills(oldState => [...oldState, data])
   }
 
   useEffect(() => {
@@ -46,7 +55,7 @@ export function Home(){
       onChangeText={setNewSkill}
       />
 
-      <Button onPress={handleAddNewSkill}/>
+      <Button onPress={handleAddNewSkill} title="Add"/>
 
       <Text style={[styles.title, { marginVertical: 50 }]}>
           My Skills
@@ -54,9 +63,11 @@ export function Home(){
 
       <FlatList 
         data={mySkills}
-        keyExtractor={item => item}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => (
-            <SkillCard skill={item}/>
+            <SkillCard 
+              skill={item.name}
+            />
         )}
       />
       
@@ -68,7 +79,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1, 
         backgroundColor:'#121015',
-        paddingHorizontal: 20,
         paddingVertical: 70,
         paddingHorizontal: 30
     },
@@ -89,3 +99,7 @@ const styles = StyleSheet.create({
       color: '#FFF'
     }
 })
+
+function setMySkills(arg0: (oldState: any) => any) {
+  throw new Error('Function not implemented.');
+}
