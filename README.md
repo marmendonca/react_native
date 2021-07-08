@@ -1,2 +1,2 @@
-# react_native
-Criando projetos com React Native, tendo como base o Ignit da Rocketseat.
+# React Native
+Criando um app React Native, tendo como base o Ignit da Rocketseat.
